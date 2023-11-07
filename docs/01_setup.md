@@ -2,9 +2,5 @@
 
 This workshop needs a specific setup based on docker.
 
----------------------------
 ## <span style="color:darkblue">Docker<span>
----------------------------
 
-
-### <span style="color:darkblue">Installation<span>
