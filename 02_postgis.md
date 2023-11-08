@@ -4,6 +4,22 @@
 ## <span style="color:darkblue">Storing geographic data in Postgresql: Postgis to the rescue!<span>
 ------------
 
+PostGIS is an open-source geospatial extension for PostgreSQL, a popular relational database management system (RDBMS). 
+It enhances PostgreSQL by adding __support for geographic objects__, allowing the storage, retrieval, and analysis of geospatial data. 
+PostGIS enables the database to handle various geospatial data types such as points, lines, polygons, and geographic features with associated attributes. It provides a __wide range of spatial functions and operators__, enabling __complex geospatial operations__ like spatial joins, buffering, and geometric calculations. PostGIS is powerful because it allows users to store and manage large volumes of geospatial data efficiently, perform spatial queries for mapping applications, conduct spatial analysis, and support geographic information system (GIS) functionalities within a database environment. Its ability to handle __spatial indexing__ and __advanced spatial analysis__ makes it a valuable tool for applications dealing with geospatial data.
+
+```{image} ./figures/postgis_logo.png
+:alt: postgis
+:width: 600px
+:align: center
+```
+
+Regarding OpenStreetMap data, which can be massive at the country scale, PostGIS supports efficient __spatial indexing__, enabling fast searches and complex geospatial queries. Its optimized spatial indexing system ensures high performance even with a significant volume of data, which is essential for some applications.
+
+Moreover, PostGIS provides a variety of spatial functions such as __distance queries__, __spatial joins__, __advanced geometric operations__, and more. These functionalities are crucial for analyzing geospatial data-driven applications.
+
+Lastly, the choice of PostGIS is reinforced by its __open source nature and active community__. The PostGIS community provides regular updates, security patches, and comprehensive documentation, making it a reliable choice for storing and querying medium to large-scale OpenStreetMap datasets at the national level.
+
 
 ------------
 ## <span style="color:darkblue">Interacting with a Postgis database<span>
@@ -12,12 +28,12 @@
 ### <span style="color:darkblue">SQL client<span>
 
 
-To interact with your database, I recommend 3 clients applications with GUI and SQL editor: DBeaver, pgAdmin or QGIS. You will need at least __one of them__. You could also run SQL command in _psql_ command line tool but it is less user friendly in this learning context. 
+To interact with your database, I recommend 3 differents applications with GUI and embedded SQL editor: _DBeaver_, _pgAdmin_ or _QGIS_. To go finish this workshop, you will need at least __one of them__. You could also run SQL command in _psql_ command line tool but it is less user friendly in this learning context. 
 
-#### <span style="color:darkblue">DBeaver community edition<span>
+#### <span style="color:darkblue">DBeaver community edition (CE)<span>
 > DBeaver Community is a free cross-platform database tool for developers, database administrators, analysts, and everyone working with data. It supports all popular SQL databases like MySQL, MariaDB, PostgreSQL, SQLite, Apache Family, and more.
 
-DBeaver _community edition_ is the software we recommend to run SQL queries during this workshop. To install it, you can follow the instructions on their official website:
+DBeaver _community edition_ is the software I recommend to run SQL queries during this workshop. To install it, you can follow the instructions on their official website:
 https://dbeaver.io/download/
 
 To create your first PostgreSQL connexion you can follow the documentation: https://dbeaver.com/2022/03/03/how-to-create-database-connection-in-dbeaver/ . 

@@ -5,11 +5,11 @@ Please follow the docker installation steps based on your OS (windows / linux / 
 
 ```{image} ./figures/docker_logo.png
 :alt: docker
-:width: 500px
+:width: 300px
 :align: center
 ```
 
-You can install Docker desktop OR Docker engine depending on your preferences.
+You can install Docker Desktop OR Docker Engine depending on your preferences.
 If this is your first experience with docker or you're unsure, Docker Desktop is recommended.
 
 ----------------
@@ -41,14 +41,14 @@ https://docs.docker.com/desktop/install/mac-install/
 ## <span style="color:darkblue">Docker Engine<span>
 ----------------
 
-You can also use a regular ```docker engine``` setup and combine it with ```docker compose``` installed as plugin:
+If your OS is linux, you can also use a regular ```docker engine``` setup and combine it with ```docker compose``` installed as plugin:
 - docker engine: https://docs.docker.com/engine/install/
 - docker compose plugin [deprecated but still working]: https://docs.docker.com/compose/install/linux/#install-using-the-repository
 
 
-As docker compose V1 stopped receiving updates from July ZO23, it is recommended to use docker compose V2 or higher.
+As docker compose V1 stopped receiving updates from July ZO23, it is recommended to use docker compose V2 or higher. (https://docs.docker.com/compose/)
 
-To check your installed _docker compose_ version, you can run the following command:
+To check your installed _docker compose_ version, you can run the following command in your terminal:
 ```bash
 docker compose version
 ```
