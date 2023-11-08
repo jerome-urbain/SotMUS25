@@ -54,8 +54,7 @@ By providing a clear and customizable mapping between OSM data and the database 
 Here is a simple mapping file directly inspired by the official imposm3 documentation (https://imposm.org/docs/imposm3/latest/mapping.html).
 This configuration allows to creates a ```road``` table in PostGIS to store linear geometries (linestring) related to any OSM data tagged as ```highway``` (of any type).
 
-:::{toggle} simple yaml mapping file
-```yml
+```yaml
 tables:
   road:
     type: linestring
@@ -69,7 +68,6 @@ tables:
     - {key: bridge, name: is_bridge, type: bool}
     - {name: highway_type, type: mapping_value}
 ```
-:::
 
 Note that some mapping rules are applied on attributes to define the columns of the ```road``` table:
 - a column named ```osm_id``` of type ID is created to store the unique identifier of the OSM element.
@@ -85,4 +83,44 @@ Note that an OSM element is only inserted once even if a mapping matches multipl
 
 ## <span style="color:darkblue">Import OSM data from an osm.pbf file based on mapping rules<span>
 
+By default the OSM data import using imposm is divided in 2 steps:
+- Reading
+- Writing
+
+
+
+### <span style="color:darkblue">Reading<span>
+
+
+ > Building the way and relation geometries requires random access to all nodes and ways, but this is not supported by the OSM PBF data format. Imposm needs to store all nodes, ways and relations in an __intermediary data store that allows random access to these elements__. It does this __on-disk to keep the memory usage of Imposm low__. Having lots of memory will still speed the import up, because your OS will use all free memory for caching of these files. Imposm uses LevelDB key-value databases for this, which are fast and compact.
+
+Imposm needs to know which OSM elements you want to have in your database. You can use the provided mapping.yml file for this tutorial, but you should read Data Mapping for more information on how to define your own mapping.
+
+Example: reading belgian data based on a ```mapping.yml``` file:
+```bash
+imposm import -mapping mapping.yml -read belgium.osm.pbf
+```
+
+We can see that a ```-read``` parameter is used in the command.
+
+
+### <span style="color:darkblue">Writing<span>
+
+> The second step is the writing of OpenStreetMap features into the database. It reads the features from the cache from step one, builds all geometries and imports them into the according tables. By default it overwrites existing tables.
+
+Example: write data already cached in a Postgis database having a dedicated osm schema:
+```bash
+imposm import -mapping mapping.yml -write -connection postgis://user:password@localhost/osm_schema
+```
+We can see this time that a ```-write``` parameter is used in the command.
+
+### <span style="color:darkblue">Combine reading and writing<span>
+
+It is also possible to combine reading and writing in one single step:
+
+```bash
+imposm import -mapping mapping.yml -read belgium.osm.pbf -write -connection postgis://user:password@localhost/osm_schema
+```
+
+Both ```-read``` and ```-write``` parameters are use in this configuration.
 

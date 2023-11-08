@@ -18,11 +18,11 @@ Regarding OpenStreetMap data, which can be massive at the country scale, PostGIS
 
 Moreover, PostGIS provides a variety of spatial functions such as __distance queries__, __spatial joins__, __advanced geometric operations__, and more. These functionalities are crucial for analyzing geospatial data-driven applications.
 
-Lastly, the choice of PostGIS is reinforced by its __open source nature and active community__. The PostGIS community provides regular updates, security patches, and comprehensive documentation, making it a reliable choice for storing and querying medium to large-scale OpenStreetMap datasets at the national level.
+Lastly, the choice of PostGIS is reinforced by its __open source nature and active community__. The PostGIS community provides regular updates, security patches, and comprehensive documentation, making it a reliable choice for storing and querying medium to large-scale OpenStreetMap datasets.
 
 
 ------------
-## <span style="color:darkblue">Interacting with a Postgis database<span>
+## <span style="color:darkblue">Interacting with Postgis<span>
 ------------
 
 ### <span style="color:darkblue">SQL client<span>
