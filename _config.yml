@@ -3,7 +3,7 @@
 
 title: State of the map workshop
 author: Benjamin Deswysen
-#copyright: "2023"  # Copyright year to be placed in the footer 
+copyright: "2023"  # Copyright year to be placed in the footer 
 logo: figures/sotm_logo.png
 
 # Force re-execution of notebooks on each build.
