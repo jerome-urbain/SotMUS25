@@ -10,7 +10,7 @@ PostGIS enables the database to handle various geospatial data types such as poi
 
 ```{image} ./figures/postgis_logo.png
 :alt: postgis
-:width: 600px
+:width: 200px
 :align: center
 ```
 
@@ -65,15 +65,13 @@ docker ps
 
 
 ------------
-## <span style="color:darkblue">Interacting with Postgis<span>
+## <span style="color:darkblue">Interacting with Postgis: SQL client<span>
 ------------
-
-### <span style="color:darkblue">SQL client<span>
 
 
 To interact with your database, I recommend 3 differents applications with GUI and embedded SQL editor: _DBeaver_, _pgAdmin_ or _QGIS_. To go finish this workshop, you will need at least __one of them__. You could also run SQL command in _psql_ command line tool but it is less user friendly in this learning context. 
 
-#### <span style="color:darkblue">DBeaver community edition (CE)<span>
+### <span style="color:darkblue">DBeaver community edition (CE)<span>
 > DBeaver Community is a free cross-platform database tool for developers, database administrators, analysts, and everyone working with data. It supports all popular SQL databases like MySQL, MariaDB, PostgreSQL, SQLite, Apache Family, and more.
 
 DBeaver _community edition_ is the software I recommend to run SQL queries during this workshop. To install it, you can follow the instructions on their official website:
@@ -93,7 +91,7 @@ If you followed the previous docker configuration (user, password, port number),
 
 
 
-#### <span style="color:darkblue">pgAdmin<span>
+### <span style="color:darkblue">pgAdmin<span>
 > pgAdmin is the most popular and feature rich Open Source administration and development platform for PostgreSQL, the most advanced Open Source database in the world. 
 
 If you prefer official PostgreSQL client and interface, you can also install and use pgAdmin: https://www.pgadmin.org/download/
@@ -108,7 +106,7 @@ If you followed the previous docker configuration (user, password, port number),
 :align: center
 ```
 
-#### <span style="color:darkblue">QGIS<span>
+### <span style="color:darkblue">QGIS<span>
 
 > A Free and Open Source Geographic Information System 
 
