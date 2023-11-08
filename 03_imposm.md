@@ -2,8 +2,17 @@
 
 # <span style="color:darkblue">Imposm<span>
 
+Official website: https://imposm.org/docs/imposm3/latest/
+
 Imposm is a command-line tool used for __importing OpenStreetMap (OSM) data into PostGIS__ databases efficiently. It is specifically designed to handle large-scale geospatial datasets. Imposm performs tasks such as data filtering, simplification, and schema mapping, ensuring that the data is structured appropriately for storage in a PostGIS-enabled PostgreSQL database. Imposm's command-line interface allows users to customize the import process according to their specific requirements, making it a valuable tool for efficiently importing and managing vast volumes of OSM data for geospatial applications.
 
+
+
+```{image} ./figures/imposm_process.png
+:alt: imposm
+:width: 500px
+:align: center
+```
 
 ## <span style="color:darkblue">What about other OSM data import tools?<span>
 
@@ -24,14 +33,56 @@ Moreover, Imposm allows for the utilization of Spatial SQL, enabling powerful sp
 
 ## <span style="color:darkblue">Filter data during the import with a mapping file<span>
 
+When importing OSM data into PostGIS with Imposm, the ```mapping.yml``` file plays a crucial role. It is used to __define the mapping between OSM data elements (nodes, ways, and relations) and the database schema in PostGIS__. 
+Imposm uses this mapping file to determine how OSM data should be stored and organized within the PostGIS database. 
 
-```{yml}
-:doc: ./imposm/mapping/mapping.yml
-:align: center
+This configuration file contains rules about:
+
+- __Data Transformation__: The ```mapping.yml``` file defines how OSM tags are transformed into database columns. Each OSM tag can be mapped to a specific column in one or more database tables. For example, OSM tags like "highway" or "name" can be mapped to corresponding columns in the database schema.
+
+- __Schema Definition__: It defines the structure of the PostGIS database schema. For instance, it specifies which tables should be created for nodes, ways, and relations, and what columns these tables should contain. The file also defines the data types for each column (e.g., text, integer, geometry).
+
+- __Geometry Types and Coordinates__: For spatial data like points, lines, and polygons, the ```mapping.yml``` file specifies how OSM node coordinates are transformed into geometries. It defines the geometry type (Point, LineString, Polygon) and the coordinate columns (usually "lon" and "lat" for longitude and latitude).
+
+- __Relations__: OSM data often contains relationships between elements. The ```mapping.yml``` file defines how these relations should be represented in the database, allowing for the creation of tables to store these relationships.
+
+- __Advanced Mapping__: The file supports more advanced configurations, such as applying filters based on OSM tags, conditional mapping (mapping certain tags only if certain conditions are met), and handling complex geometries.
+
+By providing a clear and customizable mapping between OSM data and the database schema, the ```mapping.yml``` file allows Imposm to accurately import OSM data into PostGIS, ensuring that the data is properly structured, organized, and ready for spatial queries and analysis within the PostgreSQL database.
+
+
+Here is a simple mapping file directly inspired by the official imposm3 documentation (https://imposm.org/docs/imposm3/latest/mapping.html).
+This configuration allows to creates a ```road``` table in PostGIS to store linear geometries (linestring) related to any OSM data tagged as ```highway``` (of any type).
+
+:::{toggle} simple yaml mapping file
+```yml
+tables:
+  road:
+    type: linestring
+    mapping:
+      highway: [__any__]
+      #highway: [path, track, unclassified]
+    columns:
+    - {name: osm_id, type: id}
+    - {name: geom, type: geometry}
+    - {key: name, name: street_name, type: string}
+    - {key: bridge, name: is_bridge, type: bool}
+    - {name: highway_type, type: mapping_value}
 ```
+:::
 
-{% include "./imposm/mapping/mapping.yml" language="yaml" %}
+Note that some mapping rules are applied on attributes to define the columns of the ```road``` table:
+- a column named ```osm_id``` of type ID is created to store the unique identifier of the OSM element.
+- a column named ```geom``` of type geometry is created to store the LineString geometries.
+- a ```street_name``` column of type string is created and mapped from the OSM tag with key ```name```. This allows storing street names.
+- a column named ```is_bridge``` of type _boolean_ is created and mapped from the OSM tag with key ```bridge``` to indicate whether the road is a bridge or not.
+- a column named ```highway_type``` of a custom type _mapping_value_ is created to stores the specific values of the ```highway``` tag (_path, track, unclassified, etc._).
+
+You can also see that there is a commented line to show you what would be this line for specific highway types such as _path, track and unclassified_. If you want to use this filter on highway types you can replace the previous line (containing ```__any__```) with it.
 
 
+Note that an OSM element is only inserted once even if a mapping matches multiple tags.
+
+## <span style="color:darkblue">Import OSM data from an osm.pbf file based on mapping rules<span>
 
 
