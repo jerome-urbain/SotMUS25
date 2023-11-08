@@ -14,6 +14,7 @@ PostGIS enables the database to handle various geospatial data types such as poi
 :align: center
 ```
 
+
 Regarding OpenStreetMap data, which can be massive at the country scale, PostGIS supports efficient __spatial indexing__, enabling fast searches and complex geospatial queries. Its optimized spatial indexing system ensures high performance even with a significant volume of data, which is essential for some applications.
 
 Moreover, PostGIS provides a variety of spatial functions such as __distance queries__, __spatial joins__, __advanced geometric operations__, and more. These functionalities are crucial for analyzing geospatial data-driven applications.
@@ -37,13 +38,13 @@ docker run \
 ```
 
 ```{warning}
-WARNING: if you are using Mac OS, you can have trouble with this image as it doesn't support ARN64 architecture. You can replace the last line by:
+WARNING: if you are using Mac OS, you can have troubles with this image because it doesn't support ARM64 architecture. To avoid it, you can use another postgis image and replace the last line by:
 
 ```-d imresamu/postgis:latest```
 ```
 
 
-Note that this command include some parameters:
+Note that this command includes some parameters:
 
 - ```--name postgis_sotm``` specify the name of your new docker container as "postgis_sotm"
 

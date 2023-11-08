@@ -31,6 +31,15 @@ Moreover, Imposm allows for the utilization of Spatial SQL, enabling powerful sp
 :align: center
 ```
 
+## <span style="color:darkblue">Folder structure<span>
+
+## <span style="color:darkblue">Download data<span>
+
+You can download data in osm.pbf format directly from geofabrik website ( http://download.geofabrik.de/ ). I suggest to start with a small country in the following list:
+- Andorra: http://download.geofabrik.de/europe/andorra-latest.osm.pbf
+- Luxembourg: http://download.geofabrik.de/europe/luxembourg-latest.osm.pbf
+- Belgium: http://download.geofabrik.de/europe/belgium-latest.osm.pbf
+
 ## <span style="color:darkblue">Filter data during the import with a mapping file<span>
 
 When importing OSM data into PostGIS with Imposm, the ```mapping.yml``` file plays a crucial role. It is used to __define the mapping between OSM data elements (nodes, ways, and relations) and the database schema in PostGIS__. 
@@ -89,36 +98,71 @@ To skip the tricky imposm installation on linux, you can directly pull an existi
 ```bash
 docker pull geopostcodes/imposm:1.2
 ```
-
-Then, if you want to instanciate this image in your imposm workshop directory, you can create a container with the following command:
-```bash
-docker run \
-  --name imposm_sotm \
-  -v ./imposm/import/:/import \
-  -v ./imposm/mapping/:/mapping \
-  --rm -it \
-  geopostcodes/imposm:1.2
-```
-
-
 ```{warning}
-IMPORTANT WARNING: as this imposm container and the postgis container we created before are by default isolated (container principle), they are not in the same network. In consequence, they cannot communicate together and you cannot reach postgis container from the imposm one, which make OSM import impossible based on this setup. Be patient, we will solve this issue in the next chapter! 
+IMPORTANT NOTE:
+If we instantiate this image and create a container based on it, the container will not be able to communicate with the postgis container we created before because they are isolated by default (container principle). They would not be in the same network. 
+In consequence, they cannot communicate together and you cannot reach postgis container from the imposm one, which make OSM import impossible based on this setup. Be patient, we will solve this issue in the next section!
 ```
 
 
-Here are the parameters meaning:
+## <span style="color:darkblue">Postgis + imposm docker stack<span>
 
--  ```--name imposm_sotm```: Assigns the name "imposm_sotm" to the Docker container. This name can be used to reference the container in other Docker commands.
 
-- ```-v ./imposm/import/:/import```: Mounts the local ./imposm/import/ directory into the container at the /import path. This allows the container to access files and data from the host machine located in the import directory.
+To avoid this network issue between Postgis and Imposm containers, we will use a ```docker-compose.yml``` file.
 
-- ```-v ./imposm/mapping/:/mapping```: Mounts the local ./imposm/mapping/ directory into the container at the /mapping path. This is used for providing the mapping configuration files needed for the Imposm import process.
+In a Docker Compose setup, when containers are defined within the same service stack, they share the same network namespace by default. 
+This means they can communicate with each other using their service names as hostnames. 
+For example, if we include services named ```imposm``` and ```postgis``` in a ```docker-compose.yml``` file, the imposm service can connect to the postgis db service using the hostname "postgis".
+This visibility between containers in the same stack simplifies inter-container communication, making it easier for services within the same application stack to interact with each other seamlessly.
 
-- ```--rm```: Removes the container and its filesystem when the container exits. This ensures that the container is cleaned up after it finishes its task.
 
-- ```-it```: Allocates an interactive terminal session and connects it to the container. This is useful for interacting with the running container and viewing the output or providing input if necessary.
+To combine postgis and imposm in a stack, you can save the following ```docker-compose.yml``` file:
 
-- ```geopostcodes/imposm:1.2```: Specifies the Docker image to be used for creating the container. In this case, it uses the geopostcodes/imposm image with version 1.2.
+```yaml
+version: '3.7'
+
+services:
+
+  postgis_osm:
+    image: postgis/postgis:16-3.4
+    ports: 
+      - "5482:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      
+  imposm:
+    image: geopostcodes/imposm:1.2
+    stdin_open: true  # Equivalent to -i
+    tty: true         # Equivalent to -t
+    volumes:
+        - ./imposm/import/:/import   
+        - ./imposm/mapping/:/mapping
+    depends_on:
+        - postgis_osm
+    deploy: 
+        restart_policy:
+            condition: on-failure
+            delay: 3s
+            max_attempts: 5
+            window: 5s
+```
+
+and, in the folder where you stored it, run the following docker command:
+```bash
+docker-compose up
+```
+
+```{note}
+IMPORTANT NOTE:
+As the 2 containers are in the same stack and have simplifies inter-container communication, you can use the port ```5432``` (and not 5482) and the service names ```postgis_osm``` as hostname.
+```
+
+You can now enter the container bash terminal by typing the following command:
+```bash
+docker exec -it sotm_workshop_imposm_1 bash
+```
+
+We will run some commandline from this terminal, you can keep it open for now.
 
 
 
@@ -162,6 +206,11 @@ It is also possible to combine reading and writing in one single step:
 ```bash
 imposm import -mapping mapping.yml -read belgium.osm.pbf -write -connection postgis://user:password@localhost/osm_schema
 ```
+
+```bash
+/usr/app/imposm import -mapping /mapping/mapping.yml -read /import/andorra-latest.osm.pbf -write -overwritecache -dbschema-import osm -connection postgis://postgres:postgres@postgis_osm:5432/postgres
+```
+
 
 Both ```-read``` and ```-write``` parameters are use in this configuration.
 
