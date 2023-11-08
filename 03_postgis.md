@@ -20,6 +20,49 @@ Moreover, PostGIS provides a variety of spatial functions such as __distance que
 
 Lastly, the choice of PostGIS is reinforced by its __open source nature and active community__. The PostGIS community provides regular updates, security patches, and comprehensive documentation, making it a reliable choice for storing and querying medium to large-scale OpenStreetMap datasets.
 
+------------
+## <span style="color:darkblue">Postgis docker container<span>
+------------
+
+Now that you both know Docker and Postgis it is time to use them!
+
+To directly create a Postgresql 16 database including Postgis extention (version 3.4), you can run the following command:
+
+```bash
+docker run \
+    --name postgis_sotm \
+    -p 5452:5432 \
+    -e POSTGRES_PASSWORD=postgres \
+    -d postgis/postgis:16-3.4
+```
+
+```{warning}
+WARNING: if you are using Mac OS, you can have trouble with this image as it doesn't support ARN64 architecture. You can replace the last line by:
+
+```-d imresamu/postgis:latest```
+```
+
+
+Note that this command include some parameters:
+
+- ```--name postgis_sotm``` specify the name of your new docker container as "postgis_sotm"
+
+- ```-p 5452:5432``` setup the port forwarding. The first port number correspond to your host port and the second port number correspond to your container port. They are different to avoid conflict with an existing Postgresql installation on your device.
+
+    - _Host port number_: to avoid conflict with an existing Postgresql installation running on port 5432 we change this parameter using ```-p 5452:5432``` to setup your container on host port number 5452.
+    - _Container port number_: 5432 is the default port of PostgreSQL and you need to expose it to be able to access the database in your container. You can keep this value even if you have another PostgreSQL installation or container.
+
+- ```-e POSTGRES_PASSWORD=postgres``` specify the password for admin user postgres. In this workshop we will only setup a sandbox to play with PostGIS and use postgres/postgres as credentials. If you consider using this container for another purpose please change this setup.
+
+- ```-d postgis/postgis:16-3.4``` specify the docker image from dockerhub we use. Here we use the official PostGIS image ( https://hub.docker.com/r/postgis/postgis ) based on postgres image and in a specific version: Postgresql 16 + Postgis 3.4.
+
+
+Once your container is running, you can see it in the active container list in Docker Desktop interface or by using the following docker command:
+
+```bash
+docker ps
+```
+
 
 ------------
 ## <span style="color:darkblue">Interacting with Postgis<span>
@@ -39,11 +82,31 @@ https://dbeaver.io/download/
 To create your first PostgreSQL connexion you can follow the documentation: https://dbeaver.com/2022/03/03/how-to-create-database-connection-in-dbeaver/ . 
 Note that DBeaver will automatically download and install PostgreSQL driver when you will create your first PostgreSQL connexion. 
 
+If you followed the previous docker configuration (user, password, port number), you can use the following connection setup:
+
+```{image} ./figures/dbeaver_connection.png
+:alt: dbeaver_connection
+:width: 500px
+:align: center
+```
+
+
+
+
 #### <span style="color:darkblue">pgAdmin<span>
 > pgAdmin is the most popular and feature rich Open Source administration and development platform for PostgreSQL, the most advanced Open Source database in the world. 
 
 If you prefer official PostgreSQL client and interface, you can also install and use pgAdmin: https://www.pgadmin.org/download/
 
+
+
+If you followed the previous docker configuration (user, password, port number), you can create a new server connection (_object > register > server_) and use the following connection setup:
+
+```{image} ./figures/pgadmin_connection.png
+:alt: pgadmin_connection
+:width: 500px
+:align: center
+```
 
 #### <span style="color:darkblue">QGIS<span>
 
@@ -53,3 +116,13 @@ QGIS software is able to interact with a Postgis database and run SQL queries th
 
 To install QGIS, please follow official documentation:
 https://www.qgis.org/en/site/forusers/download.html
+
+To add the connection to your local postgis database:
+_right clic on "Postgresql" in the "Browser" left menu_ > _new connection_
+and use the following setup: 
+
+```{image} ./figures/qgis_connection.png
+:alt: qgis_connection
+:width: 200px
+:align: center
+```

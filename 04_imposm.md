@@ -81,6 +81,47 @@ You can also see that there is a commented line to show you what would be this l
 
 Note that an OSM element is only inserted once even if a mapping matches multiple tags.
 
+
+
+## <span style="color:darkblue">Imposm docker container<span>
+
+To skip the tricky imposm installation on linux, you can directly pull an existing imposm docker image released by GeoPostcodes team:
+```bash
+docker pull geopostcodes/imposm:1.2
+```
+
+Then, if you want to instanciate this image in your imposm workshop directory, you can create a container with the following command:
+```bash
+docker run \
+  --name imposm_sotm \
+  -v ./imposm/import/:/import \
+  -v ./imposm/mapping/:/mapping \
+  --rm -it \
+  geopostcodes/imposm:1.2
+```
+
+
+```{warning}
+IMPORTANT WARNING: as this imposm container and the postgis container we created before are by default isolated (container principle), they are not in the same network. In consequence, they cannot communicate together and you cannot reach postgis container from the imposm one, which make OSM import impossible based on this setup. Be patient, we will solve this issue in the next chapter! 
+```
+
+
+Here are the parameters meaning:
+
+-  ```--name imposm_sotm```: Assigns the name "imposm_sotm" to the Docker container. This name can be used to reference the container in other Docker commands.
+
+- ```-v ./imposm/import/:/import```: Mounts the local ./imposm/import/ directory into the container at the /import path. This allows the container to access files and data from the host machine located in the import directory.
+
+- ```-v ./imposm/mapping/:/mapping```: Mounts the local ./imposm/mapping/ directory into the container at the /mapping path. This is used for providing the mapping configuration files needed for the Imposm import process.
+
+- ```--rm```: Removes the container and its filesystem when the container exits. This ensures that the container is cleaned up after it finishes its task.
+
+- ```-it```: Allocates an interactive terminal session and connects it to the container. This is useful for interacting with the running container and viewing the output or providing input if necessary.
+
+- ```geopostcodes/imposm:1.2```: Specifies the Docker image to be used for creating the container. In this case, it uses the geopostcodes/imposm image with version 1.2.
+
+
+
 ## <span style="color:darkblue">Import OSM data from an osm.pbf file based on mapping rules<span>
 
 By default the OSM data import using imposm is divided in 2 steps:
