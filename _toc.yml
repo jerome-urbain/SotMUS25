@@ -5,8 +5,8 @@ format: jb-book
 root: 00_intro
 chapters:
 - file: 01_setup
-- file: 02_postgis
-- file: 03_imposm
-- file: 04_docker
-- file: 05_dockerized_imposm.md
+- file: 02_docker
+- file: 03_postgis
+- file: 04_imposm
+- file: 05_docker_stack.md
 - file: 06_conclusion.md
