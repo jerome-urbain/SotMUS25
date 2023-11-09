@@ -1,5 +1,5 @@
 tables:
-  tracks:
+  road:
     type: linestring
     mapping:
       highway: [__any__]
