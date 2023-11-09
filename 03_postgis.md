@@ -38,7 +38,7 @@ docker run \
 ```
 
 ```{warning}
-WARNING: if you are using Mac OS, you can have troubles with this image because it doesn't support ARM64 architecture. To avoid it, you can use another postgis image and replace the last line by:
+WARNING: if you are using Mac OS, you can have troubles with this image because it doesn't support ARM64 architecture. To avoid it, you can use another (non official) postgis image and replace the last line by:
 
 ```-d imresamu/postgis:latest```
 ```

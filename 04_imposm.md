@@ -4,7 +4,7 @@
 
 > Official website: https://imposm.org/docs/imposm3/latest/
 
-Imposm is a command-line tool used for __importing OpenStreetMap (OSM) data into PostGIS__ databases efficiently. It is specifically designed to handle large-scale geospatial datasets. Imposm performs tasks such as data filtering, simplification, and schema mapping, ensuring that the data is structured appropriately for storage in a PostGIS-enabled PostgreSQL database. Imposm's command-line interface allows users to customize the import process according to their specific requirements, making it a valuable tool for efficiently importing and managing vast volumes of OSM data for geospatial applications.
+Imposm is a command-line _Extract Transform and Load_ (ETL) tool used for __importing OpenStreetMap (OSM) data into PostGIS__ databases efficiently. It is specifically designed to __handle large-scale geospatial datasets__. Imposm performs tasks such as data filtering, simplification, and schema mapping, ensuring that the data is structured appropriately for storage in a PostGIS-enabled PostgreSQL database. Imposm's command-line interface allows users to customize the import process according to their specific requirements, making it a valuable tool for efficiently importing and managing vast volumes of OSM data for geospatial applications.
 
 
 
