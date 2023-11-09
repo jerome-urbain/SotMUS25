@@ -53,3 +53,21 @@ To check your installed _docker compose_ version, you can run the following comm
 docker compose version
 ```
 
+----------------
+## <span style="color:darkblue">Optional: clone or download the gitlab repository<span>
+----------------
+
+This workshop is based on a public gitlab repository:
+https://gitlab.com/bdeswysen/sotm_workshop .
+
+
+If you have git or git bash (Windows) installed, feel free to clone the workshop repository:
+
+```bash
+git clone https://gitlab.com/bdeswysen/sotm_workshop.git
+```
+
+Otherwise, you can simply download it as zip file here:
+https://gitlab.com/bdeswysen/sotm_workshop/-/archive/main/sotm_workshop-main.zip
+
+
