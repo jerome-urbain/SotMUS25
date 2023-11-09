@@ -8,5 +8,6 @@ chapters:
 - file: 02_docker
 - file: 03_postgis
 - file: 04_imposm
-- file: 05_docker_stack.md
-- file: 06_conclusion.md
+- file: 05_interact_with_data.md
+- file: 06_docker_stack.md
+- file: 07_conclusion.md
