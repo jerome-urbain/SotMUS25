@@ -229,3 +229,10 @@ In your ```docker-compose.yml``` folder location, you can deploy it by running t
 ```bash
 docker-compose up
 ```
+
+
+If you want to remove the previous containers version before starting a new setup, you can use the ```docker-compose down``` command. This command stops and removes the containers defined in your ```docker-compose.yml``` file:
+
+```bash
+docker-compose down
+```

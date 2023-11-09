@@ -1,6 +1,9 @@
 # <span style="color:darkblue">Docker stack<span>
 
-
+---------------
+## <span style="color:darkblue">Automated docker stack<span>
+---------------
+If you want to go further in your deployment, you can directly add the imposm import command at the end of the ```docker-compose.yml``` file: at the end of the stack deployment, docker will also launch the import:
 
 ```yaml
 version: '3.7'
@@ -29,5 +32,9 @@ services:
             max_attempts: 5
             window: 5s
     command:  
-      /usr/app/imposm import -mapping /mapping/mapping.yml -read /osm_data/france-latest.osm.pbf -write -overwritecache -dbschema-import osm -connection postgis://postgres:postgres@postgis_osm:5432/postgres
+      /usr/app/imposm import -mapping /mapping/mapping.yml -read /osm_data/andorra-latest.osm.pbf -write -overwritecache -dbschema-import osm -connection postgis://postgres:postgres@postgis_osm:5432/postgres
 ```
+
+
+Don't forget to launch a ```docker-compose down``` command if you want to replace a previous setup.
+
