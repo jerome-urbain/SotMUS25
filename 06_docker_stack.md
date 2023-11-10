@@ -20,9 +20,8 @@ services:
   imposm:
     image: geopostcodes/imposm:1.2
     volumes:
-        - /home/bde/python_playground/unamur/landmass_identification/datasets/osm/:/import
-        - /home/bde/python_playground/unamur/landmass_identification/datasets/osm/mapping/:/mapping
-        - ./osm_data:/osm_data
+        - ./osm_data/:/osm_data   
+        - ./mapping/:/mapping
     depends_on:
         - postgis_osm
     deploy: 

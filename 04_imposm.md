@@ -33,12 +33,34 @@ Moreover, Imposm allows for the utilization of Spatial SQL, enabling powerful sp
 
 ## <span style="color:darkblue">Folder structure<span>
 
+To run the following steps, it is recommended to follow the same structure.
+
+If you cloned or downloaded the gitlab repository ( https://gitlab.com/bdeswysen/sotm_workshop ), check that you have the following structure especially for the ```imposm``` folder:
+
+```
+.
+└── sotm_workshop/
+    ├── imposm/
+    │   ├── docker-compose.yml
+    │   ├── mapping/
+    │   │   └── mapping.yml
+    │   └── osm_data/
+    │       └── XX.osm.pbf
+    ├── figures
+    ├── docker
+    └── slides
+```
+__If the ```osm_data``` folder is missing, create it (empty)__. osm.pbf files will be downloaded in the next section.
+
+
 ## <span style="color:darkblue">Download data<span>
 
 You can download data in osm.pbf format directly from geofabrik website ( http://download.geofabrik.de/ ). I suggest to start with a small country in the following list:
 - Andorra: http://download.geofabrik.de/europe/andorra-latest.osm.pbf
 - Luxembourg: http://download.geofabrik.de/europe/luxembourg-latest.osm.pbf
 - Belgium: http://download.geofabrik.de/europe/belgium-latest.osm.pbf
+
+ <span style="color:red">__To use the setup defined in this workshop, it is recommended to save these files in the ```imposm/osm_data``` folder such as described in the previous section. If this folder doesn't exist yet, create it.__<span>
 
 ## <span style="color:darkblue">Filter data during the import with a mapping file<span>
 
@@ -138,8 +160,8 @@ services:
     stdin_open: true  # Equivalent to -i
     tty: true         # Equivalent to -t
     volumes:
-        - ./imposm/osm_data/:/osm_data   
-        - ./imposm/mapping/:/mapping
+        - ./osm_data/:/osm_data   
+        - ./mapping/:/mapping
     depends_on:
         - postgis_osm
     deploy: 
@@ -193,11 +215,11 @@ Source: https://imposm.org/docs/imposm3/latest/tutorial.html
 
 Imposm needs to know which OSM elements you want to have in your database. You can use the provided mapping.yml file for this tutorial, but you should read Data Mapping for more information on how to define your own mapping.
 
-Example: to reading belgian OSM data based on a ```mapping.yml``` file, You can run the following command from the terminal inside the Imposm docker container:
+Example: to reading Andorra OSM data based on a ```mapping.yml``` file, You can run the following command from the terminal inside the Imposm docker container:
 ```bash
 # if you are not running a terminal session in the imposm container, run also the next line:
 # docker exec -it sotm_workshop_imposm_1 bash
-imposm import -mapping /mapping/mapping.yml -read belgium.osm.pbf
+/usr/app/imposm import -mapping /mapping/mapping.yml -read andorra-latest.osm.pbf
 ```
 
 We can see that a ```-read``` parameter is used in the command and the ```mapping.yml``` is used to load the mapping rules between OSM files and Postgresql database.
@@ -211,9 +233,9 @@ Source: https://imposm.org/docs/imposm3/latest/tutorial.html
 Example: write data already cached in a Postgis database and specify the destionation database (postgres):
 ```bash
 # docker exec -it sotm_workshop_imposm_1 bash
-imposm import -mapping /mapping/mapping.yml -write -connection postgis://postgres:postgres@postgis_osm:5432/postgrespostgres
+/usr/app/imposm import -mapping /mapping/mapping.yml -write -dbschema-import osm -connection postgis://postgres:postgres@postgis_osm:5432/postgrespostgres
 ```
-We can see this time that a ```-write``` parameter is used in the command and we need to specify the connection string to access the Postgis database.
+We can see this time that a ```-write``` parameter is used in the command and we need to specify the connection string to access the Postgis database. In addition, a ```-dbschema-import``` parameter is used to specify the database schema (osm).
 
 ### <span style="color:darkblue">Combine reading and writing<span>
 
@@ -221,7 +243,7 @@ It is also possible to combine reading and writing in one single step:
 
 ```bash
 # docker exec -it sotm_workshop_imposm_1 bash
-imposm import -mapping /mapping/mapping.yml -read /import/belgium.osm.pbf -write -connection postgis://postgres:postgres@postgis_osm:5432/postgres
+/usr/app/imposm import -mapping /mapping/mapping.yml -read /osm_data/andorra-latest.osm.pbf -write -connection postgis://postgres:postgres@postgis_osm:5432/postgres
 ```
 Both ```-read``` and ```-write``` parameters are use in this configuration.
 
@@ -230,5 +252,10 @@ Both ```-read``` and ```-write``` parameters are use in this configuration.
 If we want to add more parameters to customize the import, we can for example ask for overwriting the cached data during the import, specify the destination database schema and specify the port number:
 
 ```bash
-/usr/app/imposm import -mapping /mapping/mapping.yml -read /import/andorra-latest.osm.pbf -write -overwritecache -dbschema-import osm -connection postgis://postgres:postgres@postgis_osm:5432/postgres
+/usr/app/imposm import -mapping /mapping/mapping.yml -read /osm_data/andorra-latest.osm.pbf -write -overwritecache -dbschema-import osm -connection postgis://postgres:postgres@postgis_osm:5432/postgres
+```
+
+
+```{note}
+__Note:__ now that you did your first import with success, feel free to change mapping rules, import parameters and ingest bigger countries to get an overview of Imposm capabilities!
 ```
