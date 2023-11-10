@@ -54,7 +54,7 @@ docker compose version
 ```
 
 ----------------
-## <span style="color:darkblue">Optional: clone or download the gitlab repository<span>
+## <span style="color:darkblue">Clone or download the gitlab repository<span>
 ----------------
 
 This workshop is based on a public gitlab repository:
