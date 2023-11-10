@@ -11,9 +11,11 @@ services:
       
   imposm:
     image: geopostcodes/imposm:1.2
+    stdin_open: true  # Equivalent to -i
+    tty: true         # Equivalent to -t
     volumes:
-        - ./imposm/import/:/import   
-        - ./imposm/mapping/:/mapping
+        - ./osm_data/:/osm_data   
+        - ./mapping/:/mapping
     depends_on:
         - postgis_osm
     deploy: 
@@ -22,5 +24,3 @@ services:
             delay: 3s
             max_attempts: 5
             window: 5s
-    command:  
-      /usr/app/imposm import -mapping /mapping/mapping.yml -read /osm_data/belgium-latest.osm.pbf -write -overwritecache -dbschema-import osm -connection postgis://postgres:postgres@postgis_osm:5432/postgres
