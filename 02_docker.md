@@ -108,11 +108,7 @@ If you check the list of active containers, you will discover that docker assign
 Here is another docker run example related to our workshop: a postgis container with a custom setup:
 
 ```bash
-docker run \
-    --name postgis_sotm \
-    -p 5452:5432 \
-    -e POSTGRES_PASSWORD=postgres \
-    -d postgis/postgis:16-3.4
+docker run --name postgis_sotm -p 5452:5432 -e POSTGRES_PASSWORD=postgres -d postgis/postgis:16-3.4
 ```
 
 You can see that we specify a particular name for the container (postgis_sotm), handle the port forwarding, set environement variables (postgres database user password), run in background (-d), version of Postgresql (16) and finally the version of Postgis (3.4).

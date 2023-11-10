@@ -12,6 +12,7 @@ We will explore the seamless integration of OpenStreetMap (OSM) data in PostGIS 
 3. Understanding Imposm's functionalities including 
     - the mapping between OSM keywords and Postgresql table attributes 
     - the command to load medium to big OSM datasets into Postgis
+    - how to build a docker stack combining imposm and postgis
 4. Interacting with the loaded OSM data with QGIS and SQL,
 5. Enhancing your Docker stack for improved performance. 
 
