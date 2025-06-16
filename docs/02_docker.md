@@ -73,10 +73,10 @@ You can try to run the following command to pull your first docker image:
 docker pull hello-world
 ```
 
-You can now try to pull another image which will be used later in this workshop session: a postgresql (version 16) database with postgis extension (version 3.4).
+You can now try to pull another image which will be used later in this workshop session: a postgresql (version 17) database with postgis extension (version 3.5).
 
 ```bash
-docker pull postgis/postgis:16-3.4
+docker pull postgis/postgis:17-3.5
 ```
 
 ### <span style="color:#66C3FF">Docker ps<span>
