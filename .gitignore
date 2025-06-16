@@ -1,3 +1,6 @@
 # data
 *.osm.pbf
+zcta/
+#homework exercise
+homework_exercise/
 

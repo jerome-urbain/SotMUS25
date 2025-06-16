@@ -1,0 +1,15 @@
+site_name: How to put an entire count(r)y in a container - State of the Map US Workshop - June 2025 - Boston
+theme:
+  name: material
+  features:
+    - navigation.footer
+nav:
+  - Intro:  index.md
+  - 01 - Setup:  01_setup.md
+  - 02 - Docker: 02_docker.md
+  - 03 - PostGIS:  03_postgis.md
+  - 04 - Imposm: 04_imposm.md
+  - 05 - PostGIS & Imposm:  05_postgis_imposm.md
+  - 06 - Interacting with our Data: 06_interact_with_data.md
+  - 07 - docker stack:  07_docker_stack.md
+  - Conclusion: 08_conclusion.md
