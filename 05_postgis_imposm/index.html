@@ -620,7 +620,7 @@ Source: https://imposm.org/docs/imposm3/latest/tutorial.html</p>
 <p>The second step is the writing of OpenStreetMap features into the database. It reads the features from the cache from step one, builds all geometries and imports them into the according tables. By default it overwrites existing tables.
 Source: https://imposm.org/docs/imposm3/latest/tutorial.html</p>
 </blockquote>
-<p>Example: write data already cached in a Postgis database and specify the destionation database (postgres):</p>
+<p>Example: write data already cached in a Postgis database and specify the destination database (postgres):</p>
 <pre><code class="language-bash"># docker exec -it imposm-imposm-1 bash
 /usr/app/imposm import -mapping /mapping/mapping.yml -write -dbschema-import osm -connection postgis://postgres:postgres@postgis_sotm:5432/postgres
 </code></pre>
