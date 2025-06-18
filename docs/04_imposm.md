@@ -29,7 +29,7 @@ If you cloned or downloaded the github repository (<a href="https://github.com/j
 
 ```
 .
-└── sotm_workshop/
+└── SotMUS25/
     ├── imposm/
     │   ├── docker-compose.yml
     │   ├── mapping/
@@ -38,7 +38,6 @@ If you cloned or downloaded the github repository (<a href="https://github.com/j
     │       └── XX.osm.pbf
     ├── docs
         └──figures
-    ├── docker
     └── slides
 ```
 __If the ```osm_data``` folder is missing, create it (empty)__. osm.pbf files will be downloaded in the next section.

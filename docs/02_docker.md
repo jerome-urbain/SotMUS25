@@ -6,8 +6,7 @@ Below you'll find some commands and explanations for your docker survival kit at
 If you're already a power user and familiar with these concepts, you can continue with the next chapter.
 
 
-If, on the other hand, you're a novice but still want to delve deeper into the concepts after this workshop, I urge you to take a look at the docker documentation: https://docs.docker.com/
-
+If, on the other hand, you're a novice but still want to delve deeper into the concepts after this workshop, I urge you to take a look at the docker documentation: <a href="https://docs.docker.com/">https://docs.docker.com/</a>.
 
 Let's get started!
 
@@ -47,7 +46,7 @@ A container
 -------
 ## <span style="color:#66C3FF">Docker Hub<span>
 -------
-Docker Hub is the world's largest library and community for container images ( https://hub.docker.com/ ).
+Docker Hub is the world's largest library and community for container images (<a href="https://hub.docker.com/">https://hub.docker.com/</a> ).
 
 <div align="center">
 <img src="../figures/docker_hub.png" alt="docker_hub" width="75%">
@@ -100,7 +99,7 @@ docker ps --all
 
 ### <span style="color:#66C3FF">Docker run<span>
 
-This command__creates and runs a new Docker container__ based on a specified image. It can also be used to specify various options and settings for the container.
+This command __creates and runs a new Docker container__ based on a specified image. It can also be used to specify various options and settings for the container.
 
 If you try now to instanciate the hello-world image previously pulled:
 ```bash
@@ -119,7 +118,7 @@ Here is another docker run example related to our workshop: a postgis container 
 docker run --name postgis_sotm -p 5482:5432 -e POSTGRES_PASSWORD=postgres -d postgis/postgis:17-3.5
 ```
 
-You can see that we specify a particular name for the container (postgis_sotm), handle the port forwarding, set environement variables (postgres database user password), run in background (-d), version of Postgresql (17) and finally the version of Postgis (3.5).
+You can see that we specify a particular name for the container (postgis_sotm), handle the port forwarding, set environment variables (postgres database user password), run in background (-d), version of Postgresql (17) and finally the version of Postgis (3.5).
 
 Everything in 1 single command and deployed in only few seconds!
 Impressive, isn't it?!
