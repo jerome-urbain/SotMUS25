@@ -627,7 +627,7 @@ from osm.osm_road r
 group by highway_type
 order by 1 desc;
 </code></pre>
-<p>If you are interested by the proportion of each highway type (based on the number of roads, not their lenght!), you can compute the percentages per type:</p>
+<p>If you are interested by the proportion of each highway type (based on the number of roads, not their length!), you can compute the percentages per type:</p>
 <pre><code class="language-sql">with total as ( select count(*) nb from osm.osm_road r )
 select 
     count(r.*) as nb_road, 
