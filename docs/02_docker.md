@@ -79,6 +79,12 @@ You can now try to pull another image which will be used later in this workshop 
 docker pull postgis/postgis:17-3.5
 ```
 
+To prepare for the Workshop, you can also already pull the Imposm image:
+
+```bash
+docker pull geopostcodes/imposm:1.2
+```
+
 ### <span style="color:#66C3FF">Docker ps<span>
 This command shows the __list of currently running containers__ along with their details, such as container ID, names, and status.
 ```bash
