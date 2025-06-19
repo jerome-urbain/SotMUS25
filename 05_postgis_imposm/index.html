@@ -620,13 +620,62 @@ Source: https://imposm.org/docs/imposm3/latest/tutorial.html</p>
 <h3 id="writing"><span style="color:#66C3FF">Writing<span></h3>
 <blockquote>
 <p>The second step is the writing of OpenStreetMap features into the database. It reads the features from the cache from step one, builds all geometries and imports them into the corresponding tables. By default it overwrites existing tables.
-Source: https://imposm.org/docs/imposm3/latest/tutorial.html</p>
+Source: <a href="https://imposm.org/docs/imposm3/latest/tutorial.html">https://imposm.org/docs/imposm3/latest/tutorial.html</a></p>
 </blockquote>
 <p>Example: write data already cached in a PostGIS database and specify the destination database (postgres):</p>
 <pre><code class="language-bash"># docker exec -it imposm-imposm-1 bash
 /usr/app/imposm import -mapping /mapping/mapping.yml -write -dbschema-import osm -connection postgis://postgres:postgres@postgis_sotm:5432/postgres
 </code></pre>
 <p>We can see this time that a <code>-write</code> parameter is used in the command and we need to specify the connection string to access the PostGIS database. In addition, a <code>-dbschema-import</code> parameter is used to specify the database schema (osm).</p>
+<pre><code>IMPORTANT NOTE:
+Imposm 3 prefixes all tables names with _osm, by default. For instance, &quot;roads&quot; will create the table &quot;osm_roads&quot;. You can change the prefix by appending ?prefix=myprefix to the connection URL. Use NONE to disable prefixing:
+
+imposm import -mapping mapping.yml -write -connection postgis://postgres:postgres@postgis_sotm:5432/postgres?prefix=NONE
+
+Source: https://imposm.org/docs/imposm3/latest/tutorial.html
+</code></pre>
+<p>The connection string follows the following URL syntax:</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>postgis://</code></td>
+<td>Scheme</td>
+<td>Indicates the type of database (PostGIS). Required by Imposm to connect.</td>
+</tr>
+<tr>
+<td><code>postgres</code> (first)</td>
+<td>Username</td>
+<td>The database user name.</td>
+</tr>
+<tr>
+<td><code>postgres</code> (second)</td>
+<td>Password</td>
+<td>The password for the database user.</td>
+</tr>
+<tr>
+<td><code>postgis_sotm</code></td>
+<td>Host</td>
+<td>Hostname or container name (e.g., Docker service name).</td>
+</tr>
+<tr>
+<td><code>5432</code></td>
+<td>Port</td>
+<td>Port number on which the PostgreSQL/PostGIS server is listening.</td>
+</tr>
+<tr>
+<td><code>/postgres</code></td>
+<td>Database name</td>
+<td>Name of the target PostgreSQL/PostGIS database.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="combine-reading-and-writing"><span style="color:#66C3FF">Combine reading and writing<span></h3>
 <p>It is also possible to combine reading and writing in one single step:</p>
 <pre><code class="language-bash"># docker exec -it imposm-imposm-1 bash
