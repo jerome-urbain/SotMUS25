@@ -6,7 +6,7 @@ Below you'll find some commands and explanations for your docker survival kit at
 If you're already a power user and familiar with these concepts, you can continue with the next chapter.
 
 
-If, on the other hand, you're a novice but still want to delve deeper into the concepts after this workshop, I urge you to take a look at the docker documentation: <a href="https://docs.docker.com/">https://docs.docker.com/</a>.
+If, on the other hand, you're a novice but still want to delve deeper into the concepts after this workshop, I recommend you to take a look at the docker documentation: <a href="https://docs.docker.com/">https://docs.docker.com/</a>.
 
 Let's get started!
 
@@ -53,7 +53,7 @@ Docker Hub is the world's largest library and community for container images (<a
 </div>
 
 
-You can directly get official docker images or computed by the community.
+From there, you can access multiple docker images, officially relased or shared by the community.
 
 
 -------
@@ -72,7 +72,7 @@ You can try to run the following command to pull your first docker image:
 docker pull hello-world
 ```
 
-You can now try to pull another image which will be used later in this workshop session: a postgresql (version 17) database with postgis extension (version 3.5).
+You can now try to pull another image which will be used later in this workshop session: a PostgreSQL (version 17) database with PostGIS extension (version 3.5).
 
 ```bash
 docker pull postgis/postgis:17-3.5
@@ -101,7 +101,7 @@ docker ps --all
 
 This command __creates and runs a new Docker container__ based on a specified image. It can also be used to specify various options and settings for the container.
 
-If you try now to instanciate the hello-world image previously pulled:
+If you try now to instantiate the hello-world image previously pulled:
 ```bash
 docker run hello-world
 ```
@@ -110,15 +110,15 @@ You should see some kind words (coming from docker team) in the container logs! 
 
 
 
-If you check the list of active containers, you will discover that docker assign a random (fancy) name to your container. To avoid this and easily keep track of your docker containers, you can add a ```--name``` parameter.
+If you check the list of active containers, you will discover that docker assigns a random (fancy) name to your container. To avoid this and easily keep track of your docker containers, you can add a ```--name``` parameter.
 
-Here is another docker run example related to our workshop: a postgis container with a custom setup:
+Here is another docker run example related to our workshop: a PostGIS container with a custom setup:
 
 ```bash
 docker run --name postgis_sotm -p 5482:5432 -e POSTGRES_PASSWORD=postgres -d postgis/postgis:17-3.5
 ```
 
-You can see that we specify a particular name for the container (postgis_sotm), handle the port forwarding, set environment variables (postgres database user password), run in background (-d), version of Postgresql (17) and finally the version of Postgis (3.5).
+You can see that we specify a particular name for the container (postgis_sotm), handle the port forwarding, set environment variables (Postgres database user password), run in background (-d), version of PostgreSQL (17) and finally the version of PostGIS (3.5).
 
 Everything in 1 single command and deployed in only few seconds!
 Impressive, isn't it?!
@@ -160,7 +160,7 @@ If you removed your postgis_sotm with the previous command, don't forget to recr
 ### <span style="color:#66C3FF">Docker exec<span>
 This command allows you to run a command inside a running container. It provides a way to execute commands in an already running container without the need to start a new shell session.
 
-If we want to access a bash terminal in the previous postgis container, we can run:
+If we want to access a bash terminal in the previous PostGIS container, we can run:
 
 ```bash
 docker exec -it postgis_sotm bash
@@ -173,7 +173,7 @@ docker exec -it postgis_sotm bash
 
 <span style="color:red">__We won't be using dockerfiles during this workshop, just pre-built images available on the Docker Hub. This section is here for your information.__<span>
 
-A Dockerfile is a text-based file with no file extention that contains a __script of instructions__.
+A Dockerfile is a text-based file with no file extension that contains a __script of instructions__.
 Docker uses this script to __build a container image__.
 
 Here is an example of Dockerfile for an imposm image (built by GeoPostcodes team)

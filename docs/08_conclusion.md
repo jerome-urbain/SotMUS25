@@ -1,6 +1,6 @@
 # <span style="color:#66C3FF">Conclusion<span>    
 
-This workshop showed that, despite a learning curve, docker can be a great help in ingesting OpenStreetMap data into a Postgis database using imposm. Here are a few takeaways:
+This workshop showed that, despite a learning curve, docker can be a great help in ingesting OpenStreetMap data into a PostGIS database using Imposm. Here are a few takeaways:
 
 - __Efficient ETL with Imposm__: Imposm's integration with Docker simplifies the Extract, Transform, Load (ETL) process for OpenStreetMap data, enhancing efficiency in importing large-scale OpenStreetMap datasets into PostGIS databases.
 

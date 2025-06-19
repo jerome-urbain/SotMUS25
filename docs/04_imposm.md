@@ -45,7 +45,7 @@ __If the ```osm_data``` folder is missing, create it (empty)__. osm.pbf files wi
 
 ## <span style="color:#66C3FF">Download data<span>
 
-You can download data in osm.pbf format directly from geofabrik website (<a href="http://download.geofabrik.de/">http://download.geofabrik.de/</a>). I suggest to start with a small country or state in the following list:
+You can download data in osm.pbf format directly from the geofabrik website (<a href="http://download.geofabrik.de/">http://download.geofabrik.de/</a>). I suggest to start with a small country or state in the following list:
 
 - Andorra: <a href="http://download.geofabrik.de/europe/andorra-latest.osm.pbf">http://download.geofabrik.de/europe/andorra-latest.osm.pbf</a>
 - Luxembourg: <a href="http://download.geofabrik.de/europe/luxembourg-latest.osm.pbf">http://download.geofabrik.de/europe/luxembourg-latest.osm.pbf</a>
@@ -97,7 +97,7 @@ Note that some mapping rules are applied on attributes to define the columns of 
 - a column named ```geom``` of type geometry is created to store the LineString geometries.
 - a ```street_name``` column of type string is created and mapped from the OSM tag with key ```name```. This allows storing street names.
 - a column named ```is_bridge``` of type _boolean_ is created and mapped from the OSM tag with key ```bridge``` to indicate whether the road is a bridge or not.
-- a column named ```highway_type``` of a custom type _mapping_value_ is created to stores the specific values of the ```highway``` tag (_path, track, unclassified, etc._).
+- a column named ```highway_type``` of a custom type _mapping_value_ is created to store the specific values of the ```highway``` tag (_path, track, unclassified, etc._).
 
 You can also see that there is a commented line to show you what would be this line for specific highway types such as _path, track and unclassified_. If you want to use this filter on highway types you can replace the previous line (containing ```__any__```) with it.
 
@@ -117,6 +117,6 @@ With this docker image you have a ready to use imposm setup in only few seconds!
 
 ```{warning}
 IMPORTANT NOTE:
-If we instantiate this image and create a container based on it, the container will not be able to communicate with the postgis container we created before because they are isolated by default (container principle). They would not be in the same network. 
-In consequence, they cannot communicate together and you cannot reach postgis container from the imposm one, which makes OSM data import impossible based on this setup. Be patient, we will solve this issue in the next section!
+If we instantiate this image and create a container based on it, the container will not be able to communicate with the PostGIS container we created before because they are isolated by default (container principle). They would not be in the same network. 
+In consequence, they cannot communicate together and you cannot reach the PostGIS container from the imposm one, which makes OSM data import impossible based on this setup. Be patient, we will solve this issue in the next section!
 ```

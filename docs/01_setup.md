@@ -50,7 +50,7 @@ If your OS is linux, you can also use a regular ```docker engine``` setup and co
 - docker compose plugin [deprecated but still working]: <a href="https://docs.docker.com/compose/install/linux/#install-using-the-repository">https://docs.docker.com/compose/install/linux/#install-using-the-repository</a>
 
 
-As docker compose V1 stopped receiving updates from July ZO23, it is recommended to use docker compose V2 or higher. (<a href="https://docs.docker.com/compose/">https://docs.docker.com/compose/</a>)
+As docker compose V1 stopped receiving updates from July 2023, it is recommended to use docker compose V2 or higher. (<a href="https://docs.docker.com/compose/">https://docs.docker.com/compose/</a>)
 
 To check your installed _docker compose_ version, you can run the following command in your terminal:
 ```bash
@@ -58,7 +58,7 @@ docker compose version
 ```
 
 ----------------
-## <span style="color:#66C3FF">Clone or download the gitlab repository<span>
+## <span style="color:#66C3FF">Clone or download the github repository<span>
 ----------------
 
 This workshop is based on a public github repository: <a href="https://github.com/jerome-urbain/SotMUS25">https://github.com/jerome-urbain/SotMUS25</a>
