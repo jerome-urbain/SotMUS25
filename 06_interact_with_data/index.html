@@ -595,14 +595,14 @@
 
 
 
-<h1 id="query-data-stored-in-postgis"><span style="color:#66C3FF">Query data stored in Postgis<span></h1>
-<p>Depending on your setup, you can browse or query the OSM data which are now stored in Postgis.</p>
-<p>It is now time to take advantage of having the data in Postgresql database!</p>
+<h1 id="query-data-stored-in-postgis"><span style="color:#66C3FF">Query data stored in PostGIS<span></h1>
+<p>Depending on your setup, you can browse or query the OSM data which are now stored in PostGIS.</p>
+<p>It is now time to take advantage of having the data in a PostgreSQL database!</p>
 <h2 id="read-table-with-qgis"><span style="color:#66C3FF">Read table with QGIS<span></h2>
 <pre><code>NOTE:
 Due to the different possible setups tested during the preparation of this workshop, layers/tables/attributes name can differ between the screenshots and what you have on your laptop but the procedure is similar.
 </code></pre>
-<p>If you want to read your data stored in Postgis, you can use the following steps in QGIS menus:</p>
+<p>If you want to read your data stored in PostGIS, you can use the following steps in QGIS menus:</p>
 <p><em>Database menu</em> &gt; <em>DB Manager</em> &gt; <em>Postgis</em> &gt; <em>[Your_connection_name]</em> &gt; <em>[osm_schema_name]</em> &gt; <em>[osm_table_table]</em> &gt; Right click on <em>[osm_table_table]</em> &gt; <em>Add to canvas</em></p>
 <p><img src="../figures/qgis_read_postgis.png" alt="QGIS Read PostGIS" width="500" style="display: block; margin: 0 auto"></p>
 <p>Your data should now be loaded as a vector layer into QGIS map canvas:
@@ -612,7 +612,7 @@ Why not applying a categorized symbology based on the highway_type attribute for
 <h2 id="browse-and-query-table-in-dbeaver"><span style="color:#66C3FF">Browse and query table in DBeaver<span></h2>
 <p><img src="../figures/dbeaver_browse_data.png" alt="DBeaver Data Browsing" width="500" style="display: block; margin: 0 auto"></p>
 <pre><code>By default these data are stored in &quot;Web Mercator&quot; coordinates system (EPSG 3857).
-All the measures are then based on the &quot;mercator meter&quot; unit. If you want more accurate results, don't hesitate to transform the data in a more adequate/relevant projection considering your interest area.
+All the measures are then based on the &quot;mercator meter&quot; unit. If you want more accurate results, don't hesitate to transform the data in a more adequate/relevant projection considering your area of interest.
 </code></pre>
 <h2 id="query-1-10-longuest-roads"><span style="color:#66C3FF">Query 1: 10 longuest roads<span></h2>
 <pre><code class="language-sql">-- top 10 longest roads:
@@ -649,11 +649,11 @@ order by 2 desc;
 <ul>
 <li>add a municipalities table and compute the number of pedestrian road/tracks per municipality</li>
 <li>evaluate the connectivity between municipalities by extracting the roads connecting them and build a graph of it</li>
-<li>identify uncomplete OSM features in your area to plan your next contribution</li>
+<li>identify incomplete OSM features in your area to plan your next contribution</li>
 <li>...</li>
 </ul>
 <h2 id="homework-exercise"><span style="color:#66C3FF">Homework exercise<span></h2>
-<p>Can you compute the number of buildings within each Zip code are in Massachusetts?</p>
+<p>Can you compute the number of buildings within each Zip code area in Massachusetts?</p>
 <p>Adapt the code we've developed so far to:</p>
 <ol>
 <li>Import the Massachusetts data from OSM (<a href="https://download.geofabrik.de/north-america/us/massachusetts.html">https://download.geofabrik.de/north-america/us/massachusetts.html</a>)</li>
@@ -665,7 +665,7 @@ order by 2 desc;
 <li>alternative: add shp2pgsql to your PostGIS container</li>
 </ul>
 </li>
-<li>Write a query to count the number of buildings within each Zip code area</li>
+<li>Write a query to count the number of buildings within each Zip code area (! the projection systems of the 2 sources are different, so you will need to convert one of them)</li>
 <li>Follow-up: categorize building types (residential, commercial, industrial, ...) and count the proportion of each type per zip code area</li>
 </ol>
 

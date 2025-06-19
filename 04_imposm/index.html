@@ -591,7 +591,7 @@
 </code></pre>
 <p><strong>If the <code>osm_data</code> folder is missing, create it (empty)</strong>. osm.pbf files will be downloaded in the next section.</p>
 <h2 id="download-data"><span style="color:#66C3FF">Download data<span></h2>
-<p>You can download data in osm.pbf format directly from geofabrik website (<a href="http://download.geofabrik.de/">http://download.geofabrik.de/</a>). I suggest to start with a small country or state in the following list:</p>
+<p>You can download data in osm.pbf format directly from the geofabrik website (<a href="http://download.geofabrik.de/">http://download.geofabrik.de/</a>). I suggest to start with a small country or state in the following list:</p>
 <ul>
 <li>Andorra: <a href="http://download.geofabrik.de/europe/andorra-latest.osm.pbf">http://download.geofabrik.de/europe/andorra-latest.osm.pbf</a></li>
 <li>Luxembourg: <a href="http://download.geofabrik.de/europe/luxembourg-latest.osm.pbf">http://download.geofabrik.de/europe/luxembourg-latest.osm.pbf</a></li>
@@ -641,7 +641,7 @@ This configuration allows to creates a <code>road</code> table in PostGIS to sto
 <li>a column named <code>geom</code> of type geometry is created to store the LineString geometries.</li>
 <li>a <code>street_name</code> column of type string is created and mapped from the OSM tag with key <code>name</code>. This allows storing street names.</li>
 <li>a column named <code>is_bridge</code> of type <em>boolean</em> is created and mapped from the OSM tag with key <code>bridge</code> to indicate whether the road is a bridge or not.</li>
-<li>a column named <code>highway_type</code> of a custom type <em>mapping_value</em> is created to stores the specific values of the <code>highway</code> tag (<em>path, track, unclassified, etc.</em>).</li>
+<li>a column named <code>highway_type</code> of a custom type <em>mapping_value</em> is created to store the specific values of the <code>highway</code> tag (<em>path, track, unclassified, etc.</em>).</li>
 </ul>
 <p>You can also see that there is a commented line to show you what would be this line for specific highway types such as <em>path, track and unclassified</em>. If you want to use this filter on highway types you can replace the previous line (containing <code>__any__</code>) with it.</p>
 <p>Note that an OSM element is only inserted once even if a mapping matches multiple tags.</p>
@@ -651,8 +651,8 @@ This configuration allows to creates a <code>road</code> table in PostGIS to sto
 </code></pre>
 <p>With this docker image you have a ready to use imposm setup in only few seconds! It's pretty cool, isn't it?</p>
 <pre><code>IMPORTANT NOTE:
-If we instantiate this image and create a container based on it, the container will not be able to communicate with the postgis container we created before because they are isolated by default (container principle). They would not be in the same network. 
-In consequence, they cannot communicate together and you cannot reach postgis container from the imposm one, which makes OSM data import impossible based on this setup. Be patient, we will solve this issue in the next section!
+If we instantiate this image and create a container based on it, the container will not be able to communicate with the PostGIS container we created before because they are isolated by default (container principle). They would not be in the same network. 
+In consequence, they cannot communicate together and you cannot reach the PostGIS container from the imposm one, which makes OSM data import impossible based on this setup. Be patient, we will solve this issue in the next section!
 </code></pre>
 
 
